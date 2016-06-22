@@ -1,6 +1,6 @@
 import os
 import webapp2
-import time
+from time import strftime, localtime
 from google.appengine.ext.webapp import template
 
 class MainHandler(webapp2.RequestHandler):
