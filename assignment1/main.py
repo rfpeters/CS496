@@ -1,11 +1,11 @@
 import os
 import webapp2
-import datetime
+import time
 from google.appengine.ext.webapp import template
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-		now = datetime.datetime.now()		
+		now = strftime("%a, %d %b %Y %H:%M:%S", localtime())	
 		template_values = {'time': now}
 		
 		path = os.path.join(os.path.dirname(__file__), 'index.html')
