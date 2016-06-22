@@ -9,7 +9,7 @@ class MainHandler(webapp2.RequestHandler):
 		template_values = {'time': now}
 		
 		path = os.path.join(os.path.dirname(__file__), 'index.html')
-		self.response.write(template.render(path, template_values)
+		self.response.write(template.render(path, template_values))
 		
 app = webapp2.WSGIApplication([
 	('/', MainHandler)
