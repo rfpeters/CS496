@@ -7,6 +7,10 @@ class Index(base_page.BaseHandler):
 	def __init__(self, request, response):
 		self.initialize(request, response)
 		self.template_values = {}
+		
+	def render(self, page):
+		self.template_values['customers'] = [{'name':x.name, 'key':x.key.urlsafe()} for x in db_defs.Customer.query().fetch()]
+		base_page.BaseHandler.render(self, page, self.template_values)
 	
 	def get(self):
 		self.render('index.html')
