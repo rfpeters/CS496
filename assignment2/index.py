@@ -4,6 +4,9 @@ from google.appengine.ext import ndb
 import db_defs
 
 class Index(base_page.BaseHandler):
+	def __init__(self, request, response):
+		self.initialize(request, response)
+		self.template_values = {}
 	
 	def get(self):
 		self.render('index.html')
@@ -19,3 +22,4 @@ class Index(base_page.BaseHandler):
 			cust.phone = self.request.get('phone_input')
 			cust.phone_type = self.request.get('phone_type')
 			cust.put()
+		self.render('index.html')
