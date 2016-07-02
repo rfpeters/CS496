@@ -8,7 +8,7 @@ class Index(base_page.BaseHandler):
 		self.intialize(request, response)
 		self.template_values = {}
 	
-	def render(self, page):
+	
 		
 	def get(self):
 		self.render('index.html')
