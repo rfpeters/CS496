@@ -4,12 +4,7 @@ from google.appengine.ext import ndb
 import db_defs
 
 class Index(base_page.BaseHandler):
-	def __init__(self, request, response):
-		self.intialize(request, response)
-		self.template_values = {}
 	
-	
-		
 	def get(self):
 		self.render('index.html')
 		
