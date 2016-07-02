@@ -13,7 +13,9 @@ class Index(base_page.BaseHandler):
 		if action == 'add_customer':
 			k = ndb.Key(db_defs.Customer, self.app.config.get('default-group'))
 			cust = db_defs.Customer(parent=k)
-			cust.name = self.request.get('name')
-			cust.email = self.request.get('email')
-			cust.phone = self.request.get('phone')
+			cust.name = self.request.get('name_input')
+			cust.email = self.request.get('email_input')
+			cust.password = self.request.get('password_input')
+			cust.phone = self.request.get('phone_input')
 			cust.phone_type = self.request.get('phone_type')
+			cust.put()
