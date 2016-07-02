@@ -14,4 +14,4 @@ class BaseHandler(webapp2.RequestHandler):
 		
 	def render(self, template, template_vairables={}):
 		template=self.jinja2.get_template(template)
-		self.response.write(template.render(template_vairable))
+		self.response.write(template.render(template_vairables))
