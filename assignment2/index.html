@@ -5,7 +5,8 @@
 		<title>Assignment 2</title>
 	</head>
 	<body>
-		<form action="/" method="get">
+		<form action="/" method="post">
+			<input type="hidden" name="action" value="add_customer">
 			<fieldset>
 				<legend>Customer Information</legend>
 				<fieldset>
@@ -24,10 +25,8 @@
 					<label>Phone Number:
 						<input type="number" name="phone_input" size="30" maxlength="100">
 					</label>
-				</fieldset>
-				</br>
-				<fieldset>
-					<label>Select between
+					</br>
+					<label>Phone Type:
 					</br>
 					<label>
 						<input type="radio" name="phone_type" value="home"/>Home</label>
@@ -38,9 +37,30 @@
 					<label>
 						<input type="radio" name="phone_type" value="cell"/>Cell</label>
 					</br>
-					<input type="submit" value="Submit"/>
+				</fieldset>
+				</br>
+				<fieldset>
+					<label>Sports:
+					</br>
+					<label>Baseball</label><input type="checkbox" name="sports[]" value="baseball">
+					<label>Football</label><input type="checkbox" name="sports[]" value="football">
+					<label>Basketball</label><input type="checkbox" name="sports[]" value="basketball">
+					<label>Golf</label><input type="checkbox" name="sports[]" value="golf">
+					<label>Soccer</label><input type="checkbox" name="sports[]" value="soccer">
+					<label>Hockey</label><input type="checkbox" name="sports[]" value="hockey">
+				</fieldset>
+				<fieldset>					
+					<input type="submit" value="Save"/>
 				</fieldset>
 			</fieldset>
 		</form>
+		{% if customers|length > 0 %}
+		<section>
+			<h2>View Customer</h2>
+			{% for c in customers %}
+			<a href='/view?key={{ c.key }}'>{{ c.name }}</a>
+			{% endfor %}
+		</section>
+		(% endif %}
 	</body>
 </html>
