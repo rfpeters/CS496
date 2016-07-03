@@ -15,7 +15,6 @@ class Edit(base_page.BaseHandler):
 	def get(self):
 		cust_key = ndb.Key(urlsafe=self.request.get('key'))
 		cust = cust_key.get()
-		self.template_values['key'] = self.request.get('key')
 		self.template_values['cust_name'] = cust.name
 		self.template_values['cust_email'] = cust.email
 		self.template_values['cust_phone'] = cust.phone

@@ -11,6 +11,7 @@ class View(base_page.BaseHandler):
 	def get(self):
 		customer_key = ndb.Key(urlsafe=self.request.get('key'))
 		customer = customer_key.get()
+		self.template_values['key'] = self.request.get('key')
 		self.template_values['name'] = customer.name
 		self.template_values['email'] = customer.email
 		self.template_values['password'] = customer.password
