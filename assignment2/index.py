@@ -35,11 +35,13 @@ class Index(base_page.BaseHandler):
 			cust.phone_type = self.request.get('phone_type')
 			cust.sports = [ndb.Key(urlsafe=x) for x in self.request.get_all('sports[]')]
 			cust.put()
+			self.render('index.html')
 		elif action == 'add_sport':
 			k = ndb.Key(db_defs.Sports, self.app.config.get('default-group'))
 			sport = db_defs.Sports(parent=k)
 			sport.name = self.request.get('sport_input')
 			sport.put()
+			self.render('index.html')
 		elif action == 'edit_customer':
 			cust_key = ndb.Key(urlsafe=self.request.get('key'))
 			cust = cust_key.get()
@@ -59,4 +61,4 @@ class Index(base_page.BaseHandler):
 			self.template_values['sports'] = sport_box
 			self.template_values['phone_type'] = self.phone_types
 			base_page.BaseHandler.render(self, 'index.html', self.template_values)
-		self.render('index.html')
+		
