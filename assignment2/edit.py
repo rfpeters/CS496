@@ -34,14 +34,3 @@ class Edit(base_page.BaseHandler):
 		self.template_values['phone_type'] = self.phone_types
 		self.render('edit.html', self.template_values)
 		
-	def post(self):
-		cust_key = ndb.Key(urlsafe=self.request.get('key'))
-		cust = cust_key.get()
-		cust.name = self.request.get('name_input')
-		cust.email = self.request.get('email_input')
-		cust.password = self.request.get('password_input')
-		cust.phone = self.request.get('phone_input')
-		cust.phone_type = self.request.get('phone_type')
-		cust.sports = [ndb.Key(urlsafe=x) for x in self.request.get_all('sports[]')]
-		cust.put()
-		self.render('edit.html')
