@@ -4,4 +4,5 @@ config = {'default-group':'base-data'}
 
 application = webapp2.WSGIApplication([
 	('/', 'index.Index')
+	('/view', 'view.View')
 ], debug=True, config=config)
