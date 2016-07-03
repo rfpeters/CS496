@@ -49,7 +49,7 @@ class Index(base_page.BaseHandler):
 			sports = db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()
 			sport_box = []
 			for p in self.phone_types:
-				if p.name == cust.phone_type:
+				if p['name'] == cust.phone_type:
 					p.checked = True
 			for s in sports:
 				if s.key in cust.sports:
