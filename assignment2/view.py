@@ -4,6 +4,10 @@ from google.appengine.ext import ndb
 import db_defs
 
 class View(base_page.BaseHandler):
+	def __init__(self, request, response):
+		self.initialize(request, response)
+		self.template_values = {}
+		
 	def get(self):
 		customer_key = ndb.Key(urlsafe=self.request.get('key'))
 		customer = customer_key.get()
