@@ -4,19 +4,20 @@ from google.appengine.ext import ndb
 import db_defs
 
 class Index(base_page.BaseHandler):
-	phone_types = []
+	
 	
 	def __init__(self, request, response):
 		self.initialize(request, response)
 		self.template_values = {}
-		phone_types.append({'name':'home', 'checked':False})
-		phone_types.append({'name':'work', 'checked':False})
-		phone_types.append({'name':'cell', 'checked':False})
+		self.phone_types = []
+		self.phone_types.append({'name':'home', 'checked':False})
+		self.phone_types.append({'name':'work', 'checked':False})
+		self.phone_types.append({'name':'cell', 'checked':False})
 		
 	def render(self, page):
 		self.template_values['customers'] = [{'name':x.name, 'key':x.key.urlsafe()} for x in db_defs.Customer.query(ancestor=ndb.Key(db_defs.Customer, self.app.config.get('default-group'))).fetch()]
 		self.template_values['sports'] = [{'name':x.name, 'key':x.key.urlsafe(), 'checked':False} for x in db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()]
-		self.template_values['phone_type'] = phone_types
+		self.template_values['phone_type'] = self.phone_types
 		base_page.BaseHandler.render(self, page, self.template_values)
 	
 	def get(self):
