@@ -50,7 +50,7 @@
 					<label>Sports:
 					</br>
 						{% for s in sports %}
-						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}" checked="{{ s.checked }}">
+						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}" {% if checked == True %}checked{% endif %}>
 						{% endfor %}
 				</fieldset>
 				</br>		
