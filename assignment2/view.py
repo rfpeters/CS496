@@ -16,4 +16,5 @@ class View(base_page.BaseHandler):
 		self.template_values['password'] = customer.password
 		self.template_values['phone'] = customer.phone
 		self.template_values['phone_type'] = customer.phone_type
+		self.template_values['sports'] = customer.sports
 		self.render('view.html', self.template_values)
