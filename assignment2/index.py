@@ -9,7 +9,7 @@ class Index(base_page.BaseHandler):
 		self.template_values = {}
 		
 	def render(self, page):
-		self.template_values['customers'] = [{'name':x.name, 'key':x.key.urlsafe()} for x in db_defs.Customer.query().fetch()]
+		self.template_values['customers'] = [{'name':x.name, 'key':x.key.urlsafe()} for x in db_defs.Customer.query(ancestor=ndb.Key(db_defs.Customer, self.app.config.get('default-group'))).fetch()]
 		base_page.BaseHandler.render(self, page, self.template_values)
 	
 	def get(self):
