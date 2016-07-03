@@ -25,5 +25,6 @@ class Index(base_page.BaseHandler):
 			cust.password = self.request.get('password_input')
 			cust.phone = self.request.get('phone_input')
 			cust.phone_type = self.request.get('phone_type')
+			cust.sports = self.request.get_all('sports[]')
 			cust.put()
 		self.render('index.html')
