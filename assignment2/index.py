@@ -7,14 +7,15 @@ class Index(base_page.BaseHandler):
 	def __init__(self, request, response):
 		self.initialize(request, response)
 		self.template_values = {}
+		phone_types = []
+		phone_types.append({'name':'home', 'checked':False})
+		phone_types.append({'name':'work', 'checked':False})
+		phone_types.append({'name':'cell', 'checked':False})
 		
 	def render(self, page):
 		self.template_values['customers'] = [{'name':x.name, 'key':x.key.urlsafe()} for x in db_defs.Customer.query(ancestor=ndb.Key(db_defs.Customer, self.app.config.get('default-group'))).fetch()]
 		self.template_values['sports'] = [{'name':x.name, 'key':x.key.urlsafe(), 'checked':False} for x in db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()]
-		self.template_values['phone_type'] = []
-		self.template_values['phone_type'].append({'name':'home', 'checked':False})
-		self.template_values['phone_type'].append({'name':'work', 'checked':False})
-		self.template_values['phone_type'].append({'name':'cell', 'checked':False})
+		self.template_values['phone_type'] = phone_types
 		base_page.BaseHandler.render(self, page, self.template_values)
 	
 	def get(self):
@@ -37,4 +38,20 @@ class Index(base_page.BaseHandler):
 			sport = db_defs.Sports(parent=k)
 			sport.name = self.request.get('sport_input')
 			sport.put()
+		elif action == 'edit_customer':
+			cust_key = nbd.Key(urlsafe=self.request.get('key'))
+			cust = cust_key.get()
+			self.template_values['cust_name'] = cust.name
+			self.template_values['cust_email'] = cust.email
+			self.template_values['cust_phone'] = cust.phone
+			sports = db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()
+			sport_box = []
+			for p in phone_types:
+				if p.name == cust.phone_type:
+					p.checked = True
+			for s in sports:
+				if s.key in cust.sports:
+					sport_box.append[{'name':s.name, 'key':s.key.urlsafe(), 'checked':True}]
+				else:
+					sport_box.append[{'name':s.name, 'key':s.key.urlsafe(), 'checked':False}]
 		self.render('index.html')
