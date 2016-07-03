@@ -41,7 +41,7 @@ class Index(base_page.BaseHandler):
 			sport.name = self.request.get('sport_input')
 			sport.put()
 		elif action == 'edit_customer':
-			cust_key = nbd.Key(urlsafe=self.request.get('key'))
+			cust_key = ndb.Key(urlsafe=self.request.get('key'))
 			cust = cust_key.get()
 			self.template_values['cust_name'] = cust.name
 			self.template_values['cust_email'] = cust.email
