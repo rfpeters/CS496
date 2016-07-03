@@ -50,7 +50,7 @@
 					<label>Sports:
 					</br>
 						{% for s in sports %}
-						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}">
+						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}" checked="{{ s.checked }}">
 						{% endfor %}
 				</fieldset>
 				</br>		
@@ -62,7 +62,7 @@
 			<input type="hidden" name="action" value="add_sport">
 			<fieldset>
 			<legend>Add Sport</legend>
-				<label>Sport Name:
+				<label>Sport Name:	
 					<input type="text" name="sport_input" size="30" maxlength="100"/>
 				</label>
 				</br>
