@@ -10,7 +10,7 @@ class Index(base_page.BaseHandler):
 		self.initialize(request, response)
 		self.template_values = {}
 		self.phone_types = []
-		self.phone_types.append({'name':'home', 'checked':False})
+		self.phone_types.append({'name':'home', 'checked':True})
 		self.phone_types.append({'name':'work', 'checked':False})
 		self.phone_types.append({'name':'cell', 'checked':False})
 		
@@ -48,6 +48,7 @@ class Index(base_page.BaseHandler):
 			self.template_values['cust_name'] = cust.name
 			self.template_values['cust_email'] = cust.email
 			self.template_values['cust_phone'] = cust.phone
+			self.template_values['cust_pwd'] = cust.password
 			sports = db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()
 			sport_box = []
 			for p in self.phone_types:
