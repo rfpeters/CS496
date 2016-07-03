@@ -11,6 +11,10 @@ class Index(base_page.BaseHandler):
 	def render(self, page):
 		self.template_values['customers'] = [{'name':x.name, 'key':x.key.urlsafe()} for x in db_defs.Customer.query(ancestor=ndb.Key(db_defs.Customer, self.app.config.get('default-group'))).fetch()]
 		self.template_values['sports'] = [{'name':x.name, 'key':x.key.urlsafe(), 'checked':False} for x in db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()]
+		self.template_values['phone_type'] = []
+		self.template_values['phone_type'].append({'name':'home', 'checked':False})
+		self.template_values['phone_type'].append({'name':'work', 'checked':False})
+		self.template_values['phone_type'].append({'name':'cell', 'checked':False})
 		base_page.BaseHandler.render(self, page, self.template_values)
 	
 	def get(self):

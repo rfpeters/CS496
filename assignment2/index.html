@@ -34,15 +34,11 @@
 					</br>
 					<label>Phone Type:
 					</br>
+					{% for p in phone_type %}
 					<label>
-						<input type="radio" name="phone_type" value="home"/>Home</label>
+						<input type="radio" name="phone_type" value={{ p.name }} {% if checked == True %}checked{% endif %}/>{{ p.name }}</label>
 					</br>
-					<label>
-						<input type="radio" name="phone_type" value="work"/>Work</label>
-					</br>
-					<label>
-						<input type="radio" name="phone_type" value="cell"/>Cell</label>
-					</br>
+					{% endfor %}
 				</fieldset>
 				</br>
 				{% if sports|length > 0 %}
