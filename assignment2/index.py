@@ -50,7 +50,7 @@ class Index(base_page.BaseHandler):
 			sport_box = []
 			for p in self.phone_types:
 				if p['name'] == cust.phone_type:
-					p.checked = True
+					p['checked'] = True
 			for s in sports:
 				if s.key in cust.sports:
 					sport_box.append[{'name':s.name, 'key':s.key.urlsafe(), 'checked':True}]
