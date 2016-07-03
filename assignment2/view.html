@@ -10,6 +10,7 @@
 		<p>Password: {{ password}}
 		<p>Phone Number: {{ phone }} {{ phone_type }}
 		<p>Sports: {% for s in sports %} {{ s.name }} {% endfor %}
+		</br>
 		<a href='/edit?key={{ key }}'>Edit</a>
 		</br>
 		<a href='/'>Back</a>

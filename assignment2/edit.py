@@ -15,11 +15,11 @@ class Edit(base_page.BaseHandler):
 	def get(self):
 		cust_key = ndb.Key(urlsafe=self.request.get('key'))
 		cust = cust_key.get()
+		self.template_values['key'] = self.request.get('key')
 		self.template_values['cust_name'] = cust.name
 		self.template_values['cust_email'] = cust.email
 		self.template_values['cust_phone'] = cust.phone
-		self.template_values['cust_pwd'] = cust.password
-		
+		self.template_values['cust_pwd'] = cust.password		
 		sports = db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()
 		sport_box = []
 		for p in self.phone_types:
