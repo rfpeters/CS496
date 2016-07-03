@@ -4,10 +4,11 @@ from google.appengine.ext import ndb
 import db_defs
 
 class Index(base_page.BaseHandler):
+	phone_types = []
+	
 	def __init__(self, request, response):
 		self.initialize(request, response)
 		self.template_values = {}
-		phone_types = []
 		phone_types.append({'name':'home', 'checked':False})
 		phone_types.append({'name':'work', 'checked':False})
 		phone_types.append({'name':'cell', 'checked':False})
