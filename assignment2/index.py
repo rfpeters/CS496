@@ -48,7 +48,7 @@ class Index(base_page.BaseHandler):
 			self.template_values['cust_phone'] = cust.phone
 			sports = db_defs.Sports.query(ancestor=ndb.Key(db_defs.Sports, self.app.config.get('default-group'))).fetch()
 			sport_box = []
-			for p in phone_types:
+			for p in self.phone_types:
 				if p.name == cust.phone_type:
 					p.checked = True
 			for s in sports:
