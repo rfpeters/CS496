@@ -17,5 +17,5 @@ class View(base_page.BaseHandler):
 		self.template_values['phone'] = customer.phone
 		self.template_values['phone_type'] = customer.phone_type
 		self.template_values['sports'] = customer.sports
-		self.template_values['key'] = customer_key
+		self.template_values['key'] = self.request.get('key')
 		self.render('view.html', self.template_values)

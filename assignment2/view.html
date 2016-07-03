@@ -9,7 +9,7 @@
 		<p>Email: {{ email }}
 		<p>Password: {{ password}}
 		<p>Phone Number: {{ phone }} {{ phone_type }}
-		<p>Sports: {% for s in sports %} {{ s }} {% endfor %}
+		<p>Sports: {% for s in sports %} {{ s.name }} {% endfor %}
 		<form action="/" method="post">
 			<input type="hidden" name="action" value="edit_customer">
 			<input type="hidden" name="key" value="{{ key }}">
