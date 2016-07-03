@@ -45,19 +45,29 @@
 					</br>
 				</fieldset>
 				</br>
+				{% if sports|length > 0 %}
 				<fieldset>
 					<label>Sports:
 					</br>
-					<label>Baseball</label><input type="checkbox" name="sports[]" value="baseball">
-					<label>Football</label><input type="checkbox" name="sports[]" value="football">
-					<label>Basketball</label><input type="checkbox" name="sports[]" value="basketball">
-					<label>Golf</label><input type="checkbox" name="sports[]" value="golf">
-					<label>Soccer</label><input type="checkbox" name="sports[]" value="soccer">
-					<label>Hockey</label><input type="checkbox" name="sports[]" value="hockey">
+						{% for s in sports %}
+						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}">
+						{% endfor %}
 				</fieldset>
-				</br>					
+				</br>		
+				{% endif %}
 				<input type="submit" value="Save"/>
 			</fieldset>
+		</form>
+		<form action="/" method="post">
+			<input type="hidden" name="action" value="add_sport">
+			<fieldset>
+			<legend>Add Sport</legend>
+				<label>Sport Name:
+					<input type="text" name="sport_input" size="30" maxlength="100"/>
+				</label>
+				</br>
+				<input type="submit" value="Save"/>
+			</fieldset>			
 		</form>
 		{% if customers|length > 0 %}
 		<section>
