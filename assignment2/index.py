@@ -58,5 +58,5 @@ class Index(base_page.BaseHandler):
 					sport_box.append({'name':s.name, 'key':s.key.urlsafe(), 'checked':False})
 			self.template_values['sports'] = sport_box
 			self.template_values['phone_type'] = self.phone_types
-			base_page.BaseHandler.render(self, page, self.template_values)
+			base_page.BaseHandler.render(self, 'index.html', self.template_values)
 		self.render('index.html')
