@@ -36,7 +36,7 @@
 					</br>
 					{% for p in phone_type %}
 					<label>
-						<input type="radio" name="phone_type" value={{ p.name }} {% if checked == True %}checked{% endif %}/>{{ p.name }}</label>
+						<input type="radio" name="phone_type" value={{ p.name }} {% if p.checked == True %}checked{% endif %}/>{{ p.name }}</label>
 					</br>
 					{% endfor %}
 				</fieldset>
@@ -46,7 +46,7 @@
 					<label>Sports:
 					</br>
 						{% for s in sports %}
-						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}" {% if checked == True %}checked{% endif %}>
+						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}" {% if s.checked == True %}checked{% endif %}>
 						{% endfor %}
 				</fieldset>
 				</br>		
