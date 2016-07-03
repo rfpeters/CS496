@@ -10,9 +10,8 @@
 		<p>Password: {{ password}}
 		<p>Phone Number: {{ phone }} {{ phone_type }}
 		<p>Sports: {% for s in sports %} {{ s.name }} {% endfor %}
-		<form action="/" method="post">
-			<input type="hidden" name="action" value="edit_customer">
-			<input type="hidden" name="key" value="{{ key }}">
+		<form action="/edit?key={{ key}}" method="get">
+			
 			<input type="submit" value="Edit">
 		</form>
 		<a href='/'>Back</a>

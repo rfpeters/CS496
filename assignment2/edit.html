@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Assignment 2</title>
+	</head>
+	<body>
+		<form action="/" method="post">
+			<input type="hidden" name="action" value="edit_customer">
+			<input type="hidden" name="key" value="{{ key }}">
+			<fieldset>
+				<legend>Edit Customer Information</legend>
+				<fieldset>
+					<label>Name:
+						<input type="text" name="name_input" size="30" maxlength="100" value="{{ cust_name }}"/>
+					</label>
+				</fieldset>
+				</br>
+				<fieldset>
+					<label>Email:
+						<input type="email" name="email_input" size="30" maxlength="100" value="{{ cust_email }}"/>
+					</label>
+				</fieldset>
+				</br>
+				<fieldset>
+					<label>Password:
+						<input type="password" name="password_input" size="30" maxlength="100" value="{{ cust_pwd }}"/>
+					</label>
+				</fieldset>
+				</br>
+				<fieldset>
+					<label>Phone Number:
+						<input type="text" name="phone_input" size="30" maxlength="100" value="{{ cust_phone }}">
+					</label>
+					</br>
+					<label>Phone Type:
+					</br>
+					{% for p in phone_type %}
+					<label>
+						<input type="radio" name="phone_type" value={{ p.name }} {% if p.checked == True %}checked{% endif %}/>{{ p.name }}</label>
+					</br>
+					{% endfor %}
+				</fieldset>
+				</br>
+				{% if sports|length > 0 %}
+				<fieldset>
+					<label>Sports:
+					</br>
+						{% for s in sports %}
+						<label>{{ s.name }}</label><input type="checkbox" name="sports[]" value="{{ s.key }}" {% if s.checked == True %}checked{% endif %}>
+						{% endfor %}
+				</fieldset>
+				</br>		
+				{% endif %}
+				<input type="submit" value="Save"/>
+			</fieldset>
+		</form>
+	</body>
+</html>
