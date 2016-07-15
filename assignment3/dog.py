@@ -75,3 +75,25 @@ class Dog(webapp2.RequestHandler):
 			message['Failed'] = "Invalid request, id is required"
 			self.response.write(json.dumps(message))
 			return
+	
+	def put(self, **kwargs):
+		if 'application/json' not in self.request.accept:
+			self.response.status = 406
+			self.response.status_message = "Not Acceptable, API only supports application/json."
+			return
+		if 'id' in kwargs:
+			d = ndb.Key(db_defs.Dog, int(kwargs['did'])).get()
+			if not d:
+				self.response.status = 404
+				self.response.status_message = "Dog not found"
+				return
+		if 'sid' in kwargs:
+			s = ndb.Key(db_defs.Shelter, int(kwargs['sid']))
+			if not s:
+				self.response.status = 404
+				self.response.status_message = "Shelter not found"
+				return
+		d.shelter = s
+		d.put()
+		self.response.write(json.dumps(d.to_dict()))
+		return
