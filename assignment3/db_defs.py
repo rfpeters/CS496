@@ -18,7 +18,7 @@ class Dog(ndb.Model):
 	
 	def to_dict(self):
 		d = super(Dog, self).to_dict()
-		d['arrival'] = d.arrival.strftime('%m/%d/%Y')
+		d['arrival'] = d['arrival'].strftime('%m/%d/%Y')
 		return d
 	
 class Cat(ndb.Model):
