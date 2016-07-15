@@ -82,7 +82,7 @@ class Dog(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'id' in kwargs:
-			d = ndb.Key(db_defs.Dog, int(kwargs['did'])).get()
+			d = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
 			if not d:
 				self.response.status = 404
 				self.response.status_message = "Dog not found"
