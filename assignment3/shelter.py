@@ -78,4 +78,4 @@ class Shelter(webapp2.RequestHandler):
 			return
 		if 'id' in kwargs:
 			out = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
-			out.delete()
+			out.key.delete()
