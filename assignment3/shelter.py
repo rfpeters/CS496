@@ -70,3 +70,12 @@ class Shelter(webapp2.RequestHandler):
 			keys = q.fetch(keys_only=True)
 			results = {'keys':[x.id() for x in keys]}
 			self.response.write(json.dumps(results))
+			
+	def delete(self, **kwargs):
+		if 'application/json' not in self.request.accept:
+			self.response.status = 406
+			self.response.status_message = "Not Acceptable, API only supports application/json."
+			return
+		if 'id' in kwargs:
+			out = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
+			out.delete()
