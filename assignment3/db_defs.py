@@ -14,12 +14,6 @@ class Shelter(Model):
 	state = ndb.StringProperty(required=True)
 	zip = ndb.StringProperty(required=True)
 	
-	def to_dict(self):
-		s = super(Shelter, self).to_dict()
-		s['dogs'] = [d.id() for d in s['dogs']]
-		s['cats'] = [c.id() for c in s['cats']]
-		return d
-	
 class Dog(Model):
 	name = ndb.StringProperty(required=True)
 	breed = ndb.StringProperty(required=True)
@@ -30,6 +24,7 @@ class Dog(Model):
 	def to_dict(self):
 		d = super(Dog, self).to_dict()
 		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
+		d['shelter'] = self.shelter.id()
 		return d
 	
 class Cat(ndb.Model):
@@ -40,7 +35,8 @@ class Cat(ndb.Model):
 	shelter = ndb.KeyProperty()
 	
 	def to_dict(self):
-		d = super(Cat, self).to_dict()
-		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
+		c = super(Cat, self).to_dict()
+		c['arrival'] = self.arrival.strftime('%m/%d/%Y')
+		c['shelter'] = self.shelter.id()
 		return d
 	
