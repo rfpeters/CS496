@@ -97,34 +97,9 @@ class Shelter(webapp2.RequestHandler):
 		if 'id' in kwargs:
 			s = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
 			s.key.delete()
-			d = db_defs.Dog.query(db_defs.Dog.shelter == s).fetch(keys_only=True)
+			d = db_defs.Dog.query(db_defs.Dog.shelter == s.key).fetch(keys_only=True)
 			ndb.delete_multi(d)			
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"
-			return
-	
-class ShelterDog(webapp2.RequestHandler):	
-	def put(self, **kwargs):
-		if 'application/json' not in self.request.accept:
-			self.response.status = 406
-			self.response.status_message = "Not Acceptable, API only supports application/json."
-			return
-		if 'sid' in kwargs:
-			s = ndb.Key(db_defs.Shelter, int(kwargs['sid']))
-			if not s:
-				self.response.status = 404
-				self.response.status_message = "Shelter not found"
-				return
-		if 'did' in kwargs:
-			d = ndb.Key(db_defs.Dog, int(kwargs['did'])).get()
-			if not d:
-				self.response.status = 404
-				self.response.status_message = "Dog not found"
-				return
-		d.shelter = s
-		d.put()
-		self.response.write(json.dumps(d.to_dict()))
-		return
-				
-			
+			return			
