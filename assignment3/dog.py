@@ -87,7 +87,7 @@ class Dog(webapp2.RequestHandler):
 				self.response.status = 404
 				self.response.status_message = "Dog not found"
 				return		
-		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid'))
+		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
 		if not s:
 			self.response.status = 404
 			self.response.status_message = "Shelter not found"
