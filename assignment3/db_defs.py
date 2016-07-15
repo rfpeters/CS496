@@ -8,7 +8,7 @@ class Shelter(ndb.Model):
 	state = ndb.StringProperty(required=True)
 	zip = ndb.KeyProperty(repeated=True)
 	
-class Dog(nbd.Model):
+class Dog(ndb.Model):
 	name = ndb.StringProperty(required=True)
 	breed = ndb.StringProperty(required=True)
 	age = ndb.StringProperty(required=True)
