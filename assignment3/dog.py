@@ -32,6 +32,6 @@ class Dog(webapp2.RequestHandler):
 			self.response.status_message = "Invalid request, name is required"
 			return
 		key = new_dog.put()
-		out = new_dog.to_dict()
-		self.response.write(json.dumps(out))
+		#out = new_dog.to_dict()
+		#self.response.write(json.dumps(out))
 		return
