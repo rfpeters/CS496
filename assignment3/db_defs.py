@@ -12,7 +12,7 @@ class Dog(ndb.Model):
 	name = ndb.StringProperty(required=True)
 	breed = ndb.StringProperty(required=True)
 	age = ndb.StringProperty(required=True)
-	arrival = ndb.DateProperty(auto_add_now=True)
+	arrival = ndb.DateProperty(auto_now_add=True)
 	shelter = ndb.KeyProperty()
 	
 class Cat(ndb.Model):
