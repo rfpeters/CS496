@@ -6,7 +6,7 @@ class Shelter(ndb.Model):
 	address = ndb.StringProperty(required=True)
 	city = ndb.StringProperty(required=True)
 	state = ndb.StringProperty(required=True)
-	zip = ndb.KeyProperty(required=True)
+	zip = ndb.StringProperty(required=True)
 	
 class Dog(ndb.Model):
 	name = ndb.StringProperty(required=True)
