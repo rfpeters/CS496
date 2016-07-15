@@ -1,0 +1,5 @@
+curl -X POST --data "name=shelter1" --data "phone=123-4567" --data "address=132 Main St" --data "city=atlanta" --data "state=GA" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+curl -X POST --data "phone=123-4567" --data "address=132 Main St" --data "city=atlanta" --data "state=GA" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/
+curl -X POST --data "name=fido" --data "breed=lab" --data "age=puppy" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog
+curl -X POST --data "name=fluffy" --data "breed=persian" --data "age=kitten" -H "Accept: application/json" https://assignment3-1373.appspot.com/cat

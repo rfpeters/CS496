@@ -23,7 +23,7 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Invalid request, name is required"
 			message = {}
 			message['Failed'] = "Invalid request, name is required"
-			self.response.write(json.dump(message))
+			self.response.write(json.dumps(message))
 			return
 		if phone:
 			new_shelter.phone = phone
@@ -32,7 +32,7 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Invalid request, phone is required"
 			message = {}
 			message['Failed'] = "Invalid request, phone is required"
-			self.response.write(json.dump(message))
+			self.response.write(json.dumps(message))
 			return
 		if address:
 			new_shelter.address = address
@@ -41,7 +41,7 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Invalid request, address is required"
 			message = {}
 			message['Failed'] = "Invalid request, address is required"
-			self.response.write(json.dump(message))
+			self.response.write(json.dumps(message))
 			return
 		if city:
 			new_shelter.city = city
@@ -50,7 +50,7 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Invalid request, city is required"
 			message = {}
 			message['Failed'] = "Invalid request, city is required"
-			self.response.write(json.dump(message))
+			self.response.write(json.dumps(message))
 			return
 		if state:
 			new_shelter.state = state
@@ -59,7 +59,7 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Invalid request, state is required"
 			message = {}
 			message['Failed'] = "Invalid request, state is required"
-			self.response.write(json.dump(message))
+			self.response.write(json.dumps(message))
 			return
 		if zip:
 			new_shelter.zip = zip
@@ -68,7 +68,7 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Invalid request, zip is required"
 			message = {}
 			message['Failed'] = "Invalid request, zip is required"
-			self.response.write(json.dump(message))
+			self.response.write(json.dumps(message))
 			return
 		key = new_shelter.put()
 		out = new_shelter.to_dict()
