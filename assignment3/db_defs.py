@@ -27,3 +27,8 @@ class Cat(ndb.Model):
 	age = ndb.StringProperty(required=True)
 	arrival = ndb.DateProperty(auto_now_add=True)
 	
+	def to_dict(self):
+		d = super(Cat, self).to_dict()
+		d['arrival'] = d['arrival'].strftime('%m/%d/%Y')
+		return d
+	

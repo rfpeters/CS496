@@ -36,3 +36,30 @@ class Dog(webapp2.RequestHandler):
 		out = d.to_dict()
 		self.response.write(json.dumps(out))
 		return
+		
+	def get(self, **kwargs):
+		if 'application/json' not in self.request.accept:
+			self.response.status = 406
+			self.response.status_message = "Not Acceptable, API only supports application/json."
+			return
+		if 'id' in kwargs:
+			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).get().to_dict()
+			self.response.write(json.dumps(out))
+		else:
+			q = db_defs.Dog.query()
+			keys = q.fetch(keys_only=True)
+			results = {'keys':[x.id() for x in keys]}
+			self.response.write(json.dumps(results))
+			
+	def delete(self, **kwargs):
+		if 'application/json' not in self.request.accept:
+			self.response.status = 406
+			self.response.status_message = "Not Acceptable, API only supports application/json."
+			return
+		if 'id' in kwargs:
+			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
+			out.key.delete()
+		else:
+			self.response.status = 400
+			self.response.status_message = "Invalid request, id is required"
+			return
