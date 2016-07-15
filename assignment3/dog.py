@@ -18,18 +18,27 @@ class Dog(webapp2.RequestHandler):
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, name is required"
+			message = {}
+			message['Failed'] = "Invalid request, name is required"
+			self.response.write(json.dumps(message))
 			return
 		if breed:
 			new_dog.breed = breed
 		else:
 			self.response.status = 400
-			self.response.status_message = "Invalid request, name is required"
+			self.response.status_message = "Invalid request, breed is required"
+			message = {}
+			message['Failed'] = "Invalid request, breed is required"
+			self.response.write(json.dumps(message))
 			return
 		if age:
 			new_dog.age = age
 		else:
 			self.response.status = 400
-			self.response.status_message = "Invalid request, name is required"
+			self.response.status_message = "Invalid request, age is required"
+			message = {}
+			message['Failed'] = "Invalid request, age is required"
+			self.response.write(json.dumps(message))
 			return
 		key = new_dog.put()
 		d = key.get()
@@ -57,9 +66,12 @@ class Dog(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'id' in kwargs:
-			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
-			out.key.delete()
+			d = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
+			d.key.delete()
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"
+			message = {}
+			message['Failed'] = "Invalid request, id is required"
+			self.response.write(json.dumps(message))
 			return

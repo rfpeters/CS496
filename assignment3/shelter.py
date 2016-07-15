@@ -95,8 +95,11 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'id' in kwargs:
-			out = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
-			out.key.delete()
+			s = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
+			s.key.delete()
+			d = db_defs.Dog.query(db_defs.Dog.shelter == s).fetch(keys_only=True)
+			ndb.delete_multi(d)
+			
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"
