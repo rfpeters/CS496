@@ -9,7 +9,7 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status = 406
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
-		new_selter = db_models.Shelter()
+		new_selter = db_defs.Shelter()
 		name = self.request.get('name', default_value=None)
 		phone = self.request.get('phone', default_value=None)
 		address = self.request.get('address', default_value=None)
