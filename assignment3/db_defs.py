@@ -14,7 +14,7 @@ class Dog(ndb.Model):
 	name = ndb.StringProperty(required=True)
 	breed = ndb.StringProperty(required=True)
 	age = ndb.StringProperty(required=True)
-	arrival = ndb.DateProperty(auto_now_add=True
+	arrival = ndb.DateProperty(auto_now_add=True)
 	
 	def to_dict(self):
 		d = super(Dog, self).to_dict()
