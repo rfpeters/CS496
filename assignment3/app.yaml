@@ -6,7 +6,7 @@ threadsafe: yes
 
 handlers:
 - url: .*
-  script: main.appl
+  script: main.app
   
 libraries:
 - name: webapp2
