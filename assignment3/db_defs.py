@@ -1,16 +1,28 @@
 from google.appengine.ext import ndb
 
-class Shelter(ndb.Model):
+class Model(ndb.Model):
+	def to_dict(self):
+		d = super(Model, self).to_dict()
+		d['key'] = self.key.id()
+		return d
+
+class Shelter(Model):
 	name = ndb.StringProperty(required=True)
 	phone = ndb.StringProperty(required=True)
 	address = ndb.StringProperty(required=True)
 	city = ndb.StringProperty(required=True)
 	state = ndb.StringProperty(required=True)
 	zip = ndb.StringProperty(required=True)
-	dogs = ndb.KeyProperty()
-	cats = ndb.KeyProperty()
+	dogs = ndb.KeyProperty(repeated=True)
+	cats = ndb.KeyProperty(repeated=True)
 	
-class Dog(ndb.Model):
+	def to_dict(self):
+		s = super(Shelter, self).to_dict()
+		s['dogs'] = [d.id() for d in s['dogs']]
+		s['cats'] = [c.id() for c in s['cats']]
+		return d
+	
+class Dog(Model):
 	name = ndb.StringProperty(required=True)
 	breed = ndb.StringProperty(required=True)
 	age = ndb.StringProperty(required=True)
@@ -18,7 +30,7 @@ class Dog(ndb.Model):
 	
 	def to_dict(self):
 		d = super(Dog, self).to_dict()
-		d['arrival'] = d['arrival'].strftime('%m/%d/%Y')
+		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
 		return d
 	
 class Cat(ndb.Model):
@@ -29,6 +41,6 @@ class Cat(ndb.Model):
 	
 	def to_dict(self):
 		d = super(Cat, self).to_dict()
-		d['arrival'] = d['arrival'].strftime('%m/%d/%Y')
+		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
 		return d
 	
