@@ -46,6 +46,8 @@ Result: Pass, resond with failed message (zip required)
 curl -X POST --data "name=fido" --data "breed=lab" --data "age=puppy" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog
 Result: Pass, respond with entity created
 
+curl -X POST --data "name=romeo" --data "breed=peek-a-poo" --data "age=old" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog
+
 curl -X PUT --data "sid=5069036098420736" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/5071522616049664
 curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5069036098420736
 curl -X POST --data "name=fido" --data "breed=lab" --data "age=puppy" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog

@@ -24,7 +24,7 @@ class Dog(Model):
 	def to_dict(self):
 		d = super(Dog, self).to_dict()
 		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
-		if d['shelter']:
+		if d['shelter'] is not None:
 			d['shelter'] = self.shelter.id()
 		return d
 	
