@@ -40,5 +40,5 @@ class Cat(ndb.Model):
 		c['arrival'] = self.arrival.strftime('%m/%d/%Y')
 		if self.shelter:
 			c['shelter'] = self.shelter.id()
-		return d
+		return c
 	
