@@ -38,6 +38,7 @@ class Cat(ndb.Model):
 	def to_dict(self):
 		c = super(Cat, self).to_dict()
 		c['arrival'] = self.arrival.strftime('%m/%d/%Y')
-		c['shelter'] = self.shelter.id()
+		if self.shelter:
+			c['shelter'] = self.shelter.id()
 		return d
 	
