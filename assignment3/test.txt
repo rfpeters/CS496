@@ -1,8 +1,52 @@
 curl -X POST --data "name=shelter1" --data "phone=123-4567" --data "address=132 Main St" --data "city=atlanta" --data "state=GA" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with entity created
+
 curl -X POST --data "name=shelter2" --data "phone=123-4567" --data "address=132 Main St" --data "city=atlanta" --data "state=GA" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with entity created 
+
+curl -X POST --data "name=shelter3" --data "phone=765-4321" --data "address=132 Main St" --data "city=new york" --data "state=NY" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with entity created
+
+curl -X POST --data "name=" --data "phone=123-4567" --data "address=132 Main St" --data "city=atlanta" --data "state=GA" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (name required)
+
 curl -X POST --data "phone=123-4567" --data "address=132 Main St" --data "city=atlanta" --data "state=GA" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (name required)
+
+curl -X POST --data "name=shelter4" --data "phone=" --data "address=132 Main St" --data "city=new york" --data "state=NY" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (phone required)
+
+curl -X POST --data "name=shelter4" --data "address=132 Main St" --data "city=new york" --data "state=NY" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (phone required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "city=new york" --data "state=NY" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (address required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "address=" --data "city=new york" --data "state=NY" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (address required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "address=123 Main St" --data "city=" --data "state=NY" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (city required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "address=123 Main St" --data "state=NY" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (city required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "address=123 Main St" --data "city=new york" --data "state=" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (state required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "address=123 Main St" --data "city=new york" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (state required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "address=123 Main St" --data "city=new york" --data "state=NY" --data "zip=" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with failed message (zip required)
+
+curl -X POST --data "name=shelter4" --data "phone=123-4567" --data "address=123 Main St" --data "city=new york" --data "state=NY" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, resond with failed message (zip required)
+
+curl -X POST --data "name=fido" --data "breed=lab" --data "age=puppy" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog
+Result: Pass, respond with entity created
+
 curl -X PUT --data "sid=5069036098420736" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/5071522616049664
 curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5069036098420736
 curl -X POST --data "name=fido" --data "breed=lab" --data "age=puppy" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog
 curl -X POST --data "name=fluffy" --data "breed=persian" --data "age=kitten" -H "Accept: application/json" https://assignment3-1373.appspot.com/cat
-5069036098420736 5071522616049664

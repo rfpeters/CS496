@@ -24,7 +24,8 @@ class Dog(Model):
 	def to_dict(self):
 		d = super(Dog, self).to_dict()
 		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
-		d['shelter'] = self.shelter.id()
+		if d['shelter']:
+			d['shelter'] = self.shelter.id()
 		return d
 	
 class Cat(ndb.Model):

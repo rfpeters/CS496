@@ -75,3 +75,24 @@ class Cat(webapp2.RequestHandler):
 			message['Failed'] = "Invalid request, id is required"
 			self.response.write(json.dumps(message))
 			return
+	
+	def put(self, **kwargs):
+		if 'application/json' not in self.request.accept:
+			self.response.status = 406
+			self.response.status_message = "Not Acceptable, API only supports application/json."
+			return
+		if 'id' in kwargs:
+			c = ndb.Key(db_defs.Cat, int(kwargs['id'])).get()
+			if not c:
+				self.response.status = 404
+				self.response.status_message = "Dog not found"
+				return		
+		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
+		if not s:
+			self.response.status = 404
+			self.response.status_message = "Shelter not found"
+			return
+		c.shelter = s
+		c.put()
+		self.response.write(json.dumps(c.to_dict()))
+		return
