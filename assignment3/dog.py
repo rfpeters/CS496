@@ -98,7 +98,8 @@ class Dog(webapp2.RequestHandler):
 				self.response.write(json.dumps(message))
 				return		
 		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
-		if s:
+		shelter = s.get()
+		if shelter:
 			d.shelter = s
 			d.put()
 			self.response.write(json.dumps(d.to_dict()))
