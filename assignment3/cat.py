@@ -98,7 +98,8 @@ class Cat(webapp2.RequestHandler):
 				self.response.write(json.dumps(message))
 				return		
 		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
-		if s:
+		shelter = s.get()
+		if shelter:
 			c.shelter = s
 			c.put()
 			self.response.write(json.dumps(c.to_dict()))
