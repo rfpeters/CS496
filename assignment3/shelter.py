@@ -113,4 +113,7 @@ class Shelter(webapp2.RequestHandler):
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"
+			message = {}
+			message['Failed'] = "Invalid request, id is required"
+			self.response.write(json.dumps(message))
 			return			

@@ -92,12 +92,18 @@ class Cat(webapp2.RequestHandler):
 			c = ndb.Key(db_defs.Cat, int(kwargs['id'])).get()
 			if not c:
 				self.response.status = 404
-				self.response.status_message = "Dog not found"
+				self.response.status_message = "Cat not found"
+				message = {}
+				message['Failed'] = "Invalid request, unknown cat"
+				self.response.write(json.dumps(message))
 				return		
 		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
 		if not s:
 			self.response.status = 404
 			self.response.status_message = "Shelter not found"
+			message = {}
+			message['Failed'] = "Invalid request, unknown shelter"
+			self.response.write(json.dumps(message))
 			return
 		c.shelter = s
 		c.put()
