@@ -75,6 +75,13 @@ class Cat(webapp2.RequestHandler):
 			d = ndb.Key(db_defs.Cat, int(kwargs['id'])).get()
 			if d:
 				d.key.delete()
+			else:
+				self.response.status = 400
+				self.response.status_message = "Invalid request, cat unknown"
+				message = {}
+				message['Failed'] = "Invalid request, cat unknown"
+				self.response.write(json.dumps(message))
+				return
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"

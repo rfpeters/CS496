@@ -104,5 +104,11 @@ curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.co
 Result: Pass, deleted shelter entity and dog and cat entities associated with shelter
 
 curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5648554290830000
+Result: Pass, respond with failed message (unknown shelter)
+
+curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/5687539843203072
+Result: Pass, deleted dog entity
+
+curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/5687539843200000
 
 
