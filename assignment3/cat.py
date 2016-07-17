@@ -52,8 +52,14 @@ class Cat(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'id' in kwargs:
-			out = ndb.Key(db_defs.Cat, int(kwargs['id'])).get().to_dict()
-			self.response.write(json.dumps(out))
+			out = ndb.Key(db_defs.Cat, int(kwargs['id'])).get()
+			if out: 
+				out.to_dict()
+				self.response.write(json.dumps(out))
+			else:
+				message = {}
+				message['Failed'] = "Invalid request, unknown key"
+				self.response.write(json.dumps(message))
 		else:
 			q = db_defs.Cat.query()
 			keys = q.fetch(keys_only=True)

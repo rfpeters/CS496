@@ -84,7 +84,11 @@ class Shelter(webapp2.RequestHandler):
 			out = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
 			if out:
 				out.to_dict()
-			self.response.write(json.dumps(out))
+				self.response.write(json.dumps(out))
+			else:
+				message = {}
+				message['Failed'] = "Invalid request, unknown key"
+				self.response.write(json.dumps(message))
 		else:
 			q = db_defs.Shelter.query()
 			keys = q.fetch(keys_only=True)
