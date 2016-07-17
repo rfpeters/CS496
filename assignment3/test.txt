@@ -92,14 +92,17 @@ curl -X PUT --data "sid=5648554290000000" -H "Accept: application/json" https://
 Result: Pass, respond with failed message (unkown shelter)
 
 curl -X PUT --data "sid=5648554290839552" -H "Accept: application/json" https://assignment3-1373.appspot.com/cat/5124589889781760
-Result: Pass, respond with dog entity
+Result: Pass, respond with cat entity
 
 curl -X PUT --data "sid=5648554290839552" -H "Accept: application/json" https://assignment3-1373.appspot.com/cat/4814888656437248
-Result: Pass, respond with failed message (unknown dog)
+Result: Pass, respond with failed message (unknown cat)
 
 curl -X PUT --data "sid=5648554290000000" -H "Accept: application/json" https://assignment3-1373.appspot.com/cat/5124589889781760
-Result: Pass, respond with dog entity
+Result: Pass, respond with failed message (unknown shelter)
 
-curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5069036098420736
+curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5648554290839552
+Result: Pass, deleted shelter entity and dog and cat entities associated with shelter
+
+curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5648554290830000
 
 

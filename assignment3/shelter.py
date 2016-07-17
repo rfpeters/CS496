@@ -110,6 +110,14 @@ class Shelter(webapp2.RequestHandler):
 				c = db_defs.Cat.query(db_defs.Cat.shelter == s.key).fetch(keys_only=True)
 				if c:
 					ndb.delete_multi(c)
+				return
+			else:
+				self.response.status = 400
+				self.response.status_message = "Invalid request, shelter unknown"
+				message = {}
+				message['Failed'] = "Invalid request, shelter unknown"
+				self.response.write(json.dumps(message))
+				return
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"
