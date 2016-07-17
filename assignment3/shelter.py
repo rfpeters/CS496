@@ -102,11 +102,14 @@ class Shelter(webapp2.RequestHandler):
 			return
 		if 'id' in kwargs:
 			s = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
-			s.key.delete()
+			if s:
+				s.key.delete()
 			d = db_defs.Dog.query(db_defs.Dog.shelter == s.key).fetch(keys_only=True)
-			ndb.delete_multi(d)
+			if d:
+				ndb.delete_multi(d)
 			c = db_defs.Dog.query(db_defs.Cat.shelter == s.key).fetch(keys_only=True)
-			ndb.delete_multi(c)
+			if c:
+				ndb.delete_multi(c)
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"

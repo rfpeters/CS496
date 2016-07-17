@@ -73,7 +73,8 @@ class Cat(webapp2.RequestHandler):
 			return
 		if 'id' in kwargs:
 			d = ndb.Key(db_defs.Cat, int(kwargs['id'])).get()
-			d.key.delete()
+			if d:
+				d.key.delete()
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, id is required"
