@@ -98,14 +98,15 @@ class Cat(webapp2.RequestHandler):
 				self.response.write(json.dumps(message))
 				return		
 		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
-		if not s:
+		if s:
+			c.shelter = s
+			c.put()
+			self.response.write(json.dumps(c.to_dict()))
+			return
+		else:
 			self.response.status = 404
 			self.response.status_message = "Shelter not found"
 			message = {}
 			message['Failed'] = "Invalid request, unknown shelter"
 			self.response.write(json.dumps(message))
 			return
-		c.shelter = s
-		c.put()
-		self.response.write(json.dumps(c.to_dict()))
-		return

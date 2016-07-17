@@ -98,14 +98,15 @@ class Dog(webapp2.RequestHandler):
 				self.response.write(json.dumps(message))
 				return		
 		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
-		if not s:
+		if s:
+			d.shelter = s
+			d.put()
+			self.response.write(json.dumps(d.to_dict()))
+			return
+		else:
 			self.response.status = 404
 			self.response.status_message = "Shelter not found"
 			message = {}
 			message['Failed'] = "Invalid request, unkown shelter"
 			self.response.write(json.dumps(message))
 			return
-		d.shelter = s
-		d.put()
-		self.response.write(json.dumps(d.to_dict()))
-		return
