@@ -28,7 +28,7 @@ class Dog(Model):
 			d['shelter'] = self.shelter.id()
 		return d
 	
-class Cat(ndb.Model):
+class Cat(Model):
 	name = ndb.StringProperty(required=True)
 	breed = ndb.StringProperty(required=True)
 	age = ndb.StringProperty(required=True)
