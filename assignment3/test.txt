@@ -70,7 +70,16 @@ Result: Pass, respond with keys for dogs
 curl -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/4814888656437248
 Result: Pass, respond with dog entity
 
-curl -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/356
+curl -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/356
+Result: Pass, respond with failed message (unknown key)
+
+curl -H "Accept: application/json" https://assignment3-1373.appspot.com/cat
+Result: Pass, respond with keys for cats
+
+curl -H "Accept: application/json" https://assignment3-1373.appspot.com/cat/5124589889781760
+Result: Pass, respond with dog entity
+
+curl -H "Accept: application/json" https://assignment3-1373.appspot.com/cat/356
 Result: Pass, respond with failed message (unknown key)
 
 curl -X PUT --data "sid=5069036098420736" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/5071522616049664
