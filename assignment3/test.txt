@@ -50,9 +50,19 @@ curl -X POST --data "name=romeo" --data "breed=peek-a-poo" --data "age=old" -H "
 Result: Pass, respond with entity created
 
 curl -X POST --data "name=fluffy" --data "breed=persian" --data "age=kitten" -H "Accept: application/json" https://assignment3-1373.appspot.com/cat
+Result: Pass, respond with entity created
 
+curl -X POST --data "name=bellatrix" --data "breed=tabby" --data "age=kitten" -H "Accept: application/json" https://assignment3-1373.appspot.com/cat
+Result: Pass, respond with entity created
+
+curl -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
+Result: Pass, respond with keys for shelters
+
+curl -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5648554290839552
+Result: Pass, respond with shelter entity
 
 curl -X PUT --data "sid=5069036098420736" -H "Accept: application/json" https://assignment3-1373.appspot.com/dog/5071522616049664
+
 curl -X DELETE -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter/5069036098420736
 
 

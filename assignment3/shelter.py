@@ -81,7 +81,9 @@ class Shelter(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'id' in kwargs:
-			out = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get().to_dict()
+			out = ndb.Key(db_defs.Shelter, int(kwargs['id'])).get()
+			if out:
+				out.to_dict()
 			self.response.write(json.dumps(out))
 		else:
 			q = db_defs.Shelter.query()
