@@ -8,46 +8,57 @@ import json
 class User(webapp2.RequestHandler):
 	#POST request are used for creating new entities
 	#Required Parameter: name, phone, address, city, state, zip
-	def post(self):
+	def post(self, **kwargs):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
-		new_user = db_defs.User()
-		name = self.request.get('name', default_value=None)
-		email = self.request.get('email', default_value=None)
-		password = self.request.get('password', default_value=None)
-		if name:
-			new_user.name = name
+		if 'email' in kwargs:
+			query = User.query(User.email == kwargs['email'])
+			password = self.request.get('password', default_value=None)
+			if password:
+				for q in query:
+					if q.password == password:
+						out = p.to_dict()
+						self.response.write(json.dumps(out))
+						return
+			
 		else:
-			self.response.status = 400
-			self.response.status_message = "Invalid request, name is required"
-			message = {}
-			message['Failed'] = "Invalid request, name is required"
-			self.response.write(json.dumps(message))
+			new_user = db_defs.User()
+			name = self.request.get('name', default_value=None)
+			email = self.request.get('email', default_value=None)
+			password = self.request.get('password', default_value=None)
+			if name:
+				new_user.name = name
+			else:
+				self.response.status = 400
+				self.response.status_message = "Invalid request, name is required"
+				message = {}
+				message['Failed'] = "Invalid request, name is required"
+				self.response.write(json.dumps(message))
+				return
+			if email:
+				new_user.email = email
+			else:
+				self.response.status = 400
+				self.response.status_message = "Invalid request, email is required"
+				message = {}
+				message['Failed'] = "Invalid request, phone is required"
+				self.response.write(json.dumps(message))
+				return
+			if password:
+				new_user.password = password
+			else:
+				self.response.status = 400
+				self.response.status_message = "Invalid request, password is required"
+				message = {}
+				message['Failed'] = "Invalid request, address is required"
+				self.response.write(json.dumps(message))
+				return
+			key = new_user.put()
+			out = new_user.to_dict()
+			self.response.write(json.dumps(out))
 			return
-		if email:
-			new_user.email = email
-		else:
-			self.response.status = 400
-			self.response.status_message = "Invalid request, email is required"
-			message = {}
-			message['Failed'] = "Invalid request, phone is required"
-			self.response.write(json.dumps(message))
-			return
-		if password:
-			new_user.password = password
-		else:
-			self.response.status = 400
-			self.response.status_message = "Invalid request, password is required"
-			message = {}
-			message['Failed'] = "Invalid request, address is required"
-			self.response.write(json.dumps(message))
-			return
-		key = new_user.put()
-		out = new_user.to_dict()
-		self.response.write(json.dumps(out))
-		return
 	
 	#GET request are used for retrieving data from database
 	def get(self, **kwargs):
