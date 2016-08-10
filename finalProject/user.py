@@ -13,12 +13,12 @@ class User(webapp2.RequestHandler):
 			self.response.status = 406
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
-		new_shelter = db_defs.User()
+		new_user = db_defs.User()
 		name = self.request.get('name', default_value=None)
 		email = self.request.get('email', default_value=None)
 		password = self.request.get('password', default_value=None)
 		if name:
-			new_shelter.name = name
+			new_user.name = name
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, name is required"
@@ -27,7 +27,7 @@ class User(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 		if email:
-			new_shelter.phone = email
+			new_user.email = email
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, email is required"
@@ -36,7 +36,7 @@ class User(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 		if password:
-			new_shelter.password = password
+			new_user.password = password
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, password is required"
@@ -44,8 +44,8 @@ class User(webapp2.RequestHandler):
 			message['Failed'] = "Invalid request, address is required"
 			self.response.write(json.dumps(message))
 			return
-		key = new_shelter.put()
-		out = new_shelter.to_dict()
+		key = new_user.put()
+		out = new_user.to_dict()
 		self.response.write(json.dumps(out))
 		return
 	
