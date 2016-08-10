@@ -14,7 +14,7 @@ class User(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'email' in kwargs:
-			query = User.query(User.email == kwargs['email'])
+			query = db_defs.User.query(User.email == kwargs['email'])
 			password = self.request.get('password', default_value=None)
 			if password:
 				for q in query:
