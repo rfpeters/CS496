@@ -27,19 +27,19 @@ class User(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 		if email:
-			new_shelter.phone = phone
+			new_shelter.phone = email
 		else:
 			self.response.status = 400
-			self.response.status_message = "Invalid request, phone is required"
+			self.response.status_message = "Invalid request, email is required"
 			message = {}
 			message['Failed'] = "Invalid request, phone is required"
 			self.response.write(json.dumps(message))
 			return
 		if password:
-			new_shelter.address = address
+			new_shelter.password = password
 		else:
 			self.response.status = 400
-			self.response.status_message = "Invalid request, address is required"
+			self.response.status_message = "Invalid request, password is required"
 			message = {}
 			message['Failed'] = "Invalid request, address is required"
 			self.response.write(json.dumps(message))
