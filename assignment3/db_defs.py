@@ -1,3 +1,8 @@
+#Ryan Peters
+#07/16/16
+#Definitions for database entities.  Overrides to_dict() so entities
+#can be converted to JSON
+
 from google.appengine.ext import ndb
 
 class Model(ndb.Model):

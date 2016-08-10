@@ -1,3 +1,7 @@
+Ryan Peters
+07/16/16
+
+
 curl -X POST --data "name=shelter1" --data "phone=123-4567" --data "address=132 Main St" --data "city=atlanta" --data "state=GA" --data "zip=12345" -H "Accept: application/json" https://assignment3-1373.appspot.com/shelter
 Result: Pass, respond with entity created
 

@@ -1,9 +1,15 @@
+#Ryan Peters
+#07/16/16
+#Dog class for handling request for dog entities
+
 import webapp2
 from google.appengine.ext import ndb
 import db_defs
 import json
 
 class Dog(webapp2.RequestHandler):
+	#POST request are used for creating new entities
+	#Required Parameter: name, breed, age
 	def post(self):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406
@@ -45,12 +51,14 @@ class Dog(webapp2.RequestHandler):
 		out = d.to_dict()
 		self.response.write(json.dumps(out))
 		return
-		
+	
+	#GET request are used for retrieving data from database	
 	def get(self, **kwargs):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
+		#Retrieve info on one dog
 		if 'id' in kwargs:
 			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
 			if out:
@@ -60,12 +68,15 @@ class Dog(webapp2.RequestHandler):
 				message = {}
 				message['Failed'] = "Invalid request, unknown key"
 				self.response.write(json.dumps(message))
+		#Retrieve id of all cat entities
 		else:
 			q = db_defs.Dog.query()
 			keys = q.fetch(keys_only=True)
 			results = {'keys':[x.id() for x in keys]}
 			self.response.write(json.dumps(results))
-			
+		
+	#DELETE request removes a dog entity from the database
+	#Required Parameters: id
 	def delete(self, **kwargs):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406
@@ -90,6 +101,8 @@ class Dog(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 	
+	#PUT request creates an association between a dog and shelter
+	#Required Parameter: Dog id in URL, Shelter id in Body
 	def put(self, **kwargs):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406

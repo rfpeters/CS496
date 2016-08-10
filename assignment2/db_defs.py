@@ -10,7 +10,5 @@ class Customer(ndb.Model):
 	
 class Sports(ndb.Model):
 	name = ndb.StringProperty(required=True)
-	
-class Phone_Type(ndb.Model):
-	name = ndb.StringProperty(required=True)
+
 	
