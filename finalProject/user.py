@@ -19,7 +19,7 @@ class User(webapp2.RequestHandler):
 			if password:
 				for q in query:
 					if q.password == password:
-						out = p.to_dict()
+						out = q.to_dict()
 						self.response.write(json.dumps(out))
 						return
 			
