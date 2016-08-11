@@ -8,7 +8,7 @@ import json
 class User(webapp2.RequestHandler):
 	#POST request are used for creating new entities
 	#Required Parameter: name, phone, address, city, state, zip
-	def post(self, **kwargs):
+	def post(self):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406
 			self.response.status_message = "Not Acceptable, API only supports application/json."
