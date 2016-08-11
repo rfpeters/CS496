@@ -46,7 +46,7 @@ class Pokemon(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 		if user:
-			new_pokemon.user = ndb.Key(db_defs.User, int(user)).get()
+			new_pokemon.user = ndb.Key(db_defs.User, int(user)).pairs()
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, long is required"
@@ -68,7 +68,7 @@ class Pokemon(webapp2.RequestHandler):
 			return
 		#Retrieve info on one dog
 		if 'id' in kwargs:
-			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).pairs()
+			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
 			if out:
 				message=out.to_dict()
 				self.response.write(json.dumps(message))
