@@ -72,7 +72,8 @@ class Pokemon(webapp2.RequestHandler):
 			query = db_defs.Pokemon.query(db_defs.Pokemon.user == user)
 			if query:
 				message = {}
-				message['pokemon'] = out.to_dict()
+				for p in query:
+					message['pokemon'] = p.to_dict()
 				self.response.write(json.dumps(message))
 			else:
 				message = {}
