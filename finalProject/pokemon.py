@@ -132,7 +132,7 @@ class Pokemon(webapp2.RequestHandler):
 				return		
 			p.name = self.request.get('name')
 			p.put()
-			self.response.write(json.dumps(d.to_dict()))
+			self.response.write(json.dumps(p.to_dict()))
 			return
 		#else:
 		#	self.response.status = 404
