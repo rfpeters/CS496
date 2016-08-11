@@ -22,9 +22,9 @@ class Pokemon(Model):
 	user = ndb.KeyProperty()
 	
 	def to_dict(self):
-		d = super(Dog, self).to_dict()
+		d = super(Pokemon, self).to_dict()
 		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
 		if self.shelter:
-			d['shelter'] = self.shelter.id()
+			d['user'] = self.user.id()
 		return d
 	
