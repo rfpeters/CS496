@@ -16,5 +16,5 @@ class Login(webapp2.RequestHandler):
 					self.response.write(json.dumps(out))
 					return
 			message = {}
-				message['Failed'] = "Email and password did not match"
-				self.response.write(json.dumps(message))
+			message['Failed'] = "Email and password did not match"
+			self.response.write(json.dumps(message))
