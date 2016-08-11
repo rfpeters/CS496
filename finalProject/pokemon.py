@@ -68,17 +68,19 @@ class Pokemon(webapp2.RequestHandler):
 			return
 		#Retrieve info on one dog
 		if 'id' in kwargs:
-			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
-			if out:
-				message=out.to_dict()
+			user = ndb.Key(db_defs.User, int(kwargs['id']))
+			query = db_defs.Pokemon.query(db_defs.Pokemon.user == user)
+			if query:
+				message = {}
+				message.append(out.to_dict())
 				self.response.write(json.dumps(message))
 			else:
 				message = {}
-				message['Failed'] = "Invalid request, unknown key"
+				message['Failed'] = "Invalid request, unknown user"
 				self.response.write(json.dumps(message))
 		#Retrieve id of all cat entities
 		else:
-			q = db_defs.Dog.query()
+			q = db_defs.Pokemon.query()
 			keys = q.fetch(keys_only=True)
 			results = {'keys':[x.id() for x in keys]}
 			self.response.write(json.dumps(results))
@@ -91,14 +93,14 @@ class Pokemon(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'id' in kwargs:
-			d = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
+			d = ndb.Key(db_defs.Pokemon, int(kwargs['id'])).get()
 			if d:
 				d.key.delete()
 			else:
 				self.response.status = 400
-				self.response.status_message = "Invalid request, dog unknown"
+				self.response.status_message = "Invalid request, pokemon unknown"
 				message = {}
-				message['Failed'] = "Invalid request, dog unknown"
+				message['Failed'] = "Invalid request, pokemon unknown"
 				self.response.write(json.dumps(message))
 				return
 		else:
@@ -117,25 +119,22 @@ class Pokemon(webapp2.RequestHandler):
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
 		if 'id' in kwargs:
-			d = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
-			if not d:
+			p = ndb.Key(db_defs.Pokemon, int(kwargs['id'])).get()
+			if not p:
 				self.response.status = 404
 				self.response.status_message = "Dog not found"
 				message = {}
 				message['Failed'] = "Invalid request, unknown dog"
 				self.response.write(json.dumps(message))
 				return		
-		s = ndb.Key(db_defs.Shelter, int(self.request.get('sid')))
-		shelter = s.get()
-		if shelter:
-			d.shelter = s
-			d.put()
+			p.name = self.request.get('name')
+			p.put()
 			self.response.write(json.dumps(d.to_dict()))
 			return
-		else:
-			self.response.status = 404
-			self.response.status_message = "Shelter not found"
-			message = {}
-			message['Failed'] = "Invalid request, unknown shelter"
-			self.response.write(json.dumps(message))
-			return
+		#else:
+		#	self.response.status = 404
+		#	self.response.status_message = "Shelter not found"
+		#	message = {}
+		#	message['Failed'] = "Invalid request, unknown shelter"
+		#	self.response.write(json.dumps(message))
+		#	return
