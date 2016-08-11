@@ -46,7 +46,7 @@ class Pokemon(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 		if user:
-			new_pokemon.user = ndb.Key(db_defs.User, int(user)).pairs()
+			new_pokemon.user = ndb.Key(db_defs.User, int(user))
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, long is required"
