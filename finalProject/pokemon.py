@@ -36,7 +36,7 @@ class Pokemon(webapp2.RequestHandler):
 			message['Failed'] = "Invalid request, lat is required"
 			self.response.write(json.dumps(message))
 			return
-		if age:
+		if long:
 			new_pokemon.long = long
 		else:
 			self.response.status = 400
@@ -46,7 +46,7 @@ class Pokemon(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 		if user:
-			new_pokemon.user = int(user)
+			new_pokemon.user = ndb.Key(db_defs.User, int(user)).get()
 		else:
 			self.response.status = 400
 			self.response.status_message = "Invalid request, long is required"
