@@ -23,7 +23,7 @@ class Pokemon(Model):
 	
 	def to_dict(self):
 		d = super(Pokemon, self).to_dict()
-		d['arrival'] = self.arrival.strftime('%m/%d/%Y')
+		d['caught'] = self.caught.strftime('%m/%d/%Y')
 		if self.shelter:
 			d['user'] = self.user.id()
 		return d
