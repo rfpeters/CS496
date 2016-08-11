@@ -68,7 +68,7 @@ class Pokemon(webapp2.RequestHandler):
 			return
 		#Retrieve info on one dog
 		if 'id' in kwargs:
-			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).get()
+			out = ndb.Key(db_defs.Dog, int(kwargs['id'])).pairs()
 			if out:
 				message=out.to_dict()
 				self.response.write(json.dumps(message))
