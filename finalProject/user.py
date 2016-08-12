@@ -33,7 +33,7 @@ class User(webapp2.RequestHandler):
 			self.response.status = 400
 			self.response.status_message = "Invalid request, email is required"
 			message = {}
-			message['Failed'] = "Invalid request, phone is required"
+			message['Failed'] = "Invalid request, email is required"
 			self.response.write(json.dumps(message))
 			return
 		if password:
@@ -42,7 +42,7 @@ class User(webapp2.RequestHandler):
 			self.response.status = 400
 			self.response.status_message = "Invalid request, password is required"
 			message = {}
-			message['Failed'] = "Invalid request, address is required"
+			message['Failed'] = "Invalid request, password is required"
 			self.response.write(json.dumps(message))
 			return
 		key = new_user.put()
@@ -90,9 +90,9 @@ class User(webapp2.RequestHandler):
 				return
 			else:
 				self.response.status = 400
-				self.response.status_message = "Invalid request, shelter unknown"
+				self.response.status_message = "Invalid request, user unknown"
 				message = {}
-				message['Failed'] = "Invalid request, shelter unknown"
+				message['Failed'] = "Invalid request, user unknown"
 				self.response.write(json.dumps(message))
 				return
 		else:

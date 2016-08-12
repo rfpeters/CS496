@@ -49,9 +49,9 @@ class Pokemon(webapp2.RequestHandler):
 			new_pokemon.user = ndb.Key(db_defs.User, int(user))
 		else:
 			self.response.status = 400
-			self.response.status_message = "Invalid request, long is required"
+			self.response.status_message = "Invalid request, user is required"
 			message = {}
-			message['Failed'] = "Invalid request, long is required"
+			message['Failed'] = "Invalid request, user is required"
 			self.response.write(json.dumps(message))
 			return
 		key = new_pokemon.put()
@@ -128,19 +128,12 @@ class Pokemon(webapp2.RequestHandler):
 			p = ndb.Key(db_defs.Pokemon, int(kwargs['id'])).get()
 			if not p:
 				self.response.status = 404
-				self.response.status_message = "Dog not found"
+				self.response.status_message = "Pokemon not found"
 				message = {}
-				message['Failed'] = "Invalid request, unknown dog"
+				message['Failed'] = "Invalid request, unknown pokemon"
 				self.response.write(json.dumps(message))
 				return		
 			p.name = self.request.get('name')
 			p.put()
 			self.response.write(json.dumps(p.to_dict()))
 			return
-		#else:
-		#	self.response.status = 404
-		#	self.response.status_message = "Shelter not found"
-		#	message = {}
-		#	message['Failed'] = "Invalid request, unknown shelter"
-		#	self.response.write(json.dumps(message))
-		#	return
