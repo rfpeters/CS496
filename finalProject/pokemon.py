@@ -99,6 +99,9 @@ class Pokemon(webapp2.RequestHandler):
 			d = ndb.Key(db_defs.Pokemon, int(kwargs['id'])).get()
 			if d:
 				d.key.delete()
+				message = {}
+				message['Succsess'] = "pokemon deleted"
+				self.response.write(json.dumps(message))
 			else:
 				self.response.status = 400
 				self.response.status_message = "Invalid request, pokemon unknown"
