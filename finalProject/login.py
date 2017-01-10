@@ -6,6 +6,8 @@ import db_defs
 import json
 
 class Login(webapp2.RequestHandler):
+	#POST request used for checking credentials for login
+	#Required Parameter:email and password in Body
 	def post(self):
 		query = db_defs.User.query(db_defs.User.email == self.request.get('email', default_value=None))
 		password = self.request.get('password', default_value=None)

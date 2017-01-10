@@ -7,7 +7,7 @@ import json
 
 class Pokemon(webapp2.RequestHandler):
 	#POST request are used for creating new entities
-	#Required Parameter: name, breed, age
+	#Required Parameter: name, lat, long, user
 	def post(self):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406
@@ -66,7 +66,7 @@ class Pokemon(webapp2.RequestHandler):
 			self.response.status = 406
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
-		#Retrieve info on one dog
+		#Retrieve info on pokemon for a user
 		if 'id' in kwargs:
 			user = ndb.Key(db_defs.User, int(kwargs['id']))
 			query = db_defs.Pokemon.query(db_defs.Pokemon.user == user)
@@ -81,14 +81,14 @@ class Pokemon(webapp2.RequestHandler):
 				message = {}
 				message['Failed'] = "Invalid request, unknown user"
 				self.response.write(json.dumps(message))
-		#Retrieve id of all cat entities
+		#Retrieve id of all pokemon entities
 		else:
 			q = db_defs.Pokemon.query()
 			keys = q.fetch(keys_only=True)
 			results = {'keys':[x.id() for x in keys]}
 			self.response.write(json.dumps(results))
 		
-	#DELETE request removes a dog entity from the database
+	#DELETE request removes a pokemon entity from the database
 	#Required Parameters: id
 	def delete(self, **kwargs):
 		if 'application/json' not in self.request.accept:
@@ -117,8 +117,8 @@ class Pokemon(webapp2.RequestHandler):
 			self.response.write(json.dumps(message))
 			return
 	
-	#PUT request creates an association between a dog and shelter
-	#Required Parameter: Dog id in URL, Shelter id in Body
+	#PUT request updates pokemon name
+	#Required Parameter: Pokemon id in URL, new name in Body
 	def put(self, **kwargs):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406

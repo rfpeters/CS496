@@ -7,7 +7,7 @@ import json
 
 class User(webapp2.RequestHandler):
 	#POST request are used for creating new entities
-	#Required Parameter: name, phone, address, city, state, zip
+	#Required Parameter: name, email, password
 	def post(self):
 		if 'application/json' not in self.request.accept:
 			self.response.status = 406
@@ -56,7 +56,7 @@ class User(webapp2.RequestHandler):
 			self.response.status = 406
 			self.response.status_message = "Not Acceptable, API only supports application/json."
 			return
-		#Retrieve info on one shelter
+		#Retrieve info on one user
 		if 'id' in kwargs:
 			out = ndb.Key(db_defs.User, int(kwargs['id'])).get()
 			if out:
@@ -66,14 +66,14 @@ class User(webapp2.RequestHandler):
 				message = {}
 				message['Failed'] = "Invalid request, unknown key"
 				self.response.write(json.dumps(message))
-		#Retrieve id of all cat entities
+		#Retrieve id of all user entities
 		else:
 			q = db_defs.User.query()
 			keys = q.fetch(keys_only=True)
 			results = {'keys':[x.id() for x in keys]}
 			self.response.write(json.dumps(results))
 	
-	#DELETE request removes a shelter entity from the database
+	#DELETE request removes a user entity from the database
 	#Required Parameters: id
 	def delete(self, **kwargs):
 		if 'application/json' not in self.request.accept:
